@@ -163,7 +163,7 @@ class Hand:
         return self._cards.pop(card_num)
 
     def sort_hand(self):
-        pass
+        self._cards.sort(reverse=True)
 
     def length(self):
         return len(self._cards)
@@ -214,12 +214,13 @@ class Turn:
     def __init__(self, player):
         self.player = player
         print(f"\nIt is now {self.player}'s turn")
+        player.hand.sort_hand()
 
     def choose_card(self):
         confirmed = False
         while not confirmed:
             chosen_card_index = input(
-                f'Choose a card from your hand:\n{self.player.hand}\n')
+                f'Choose the position of a card from your hand (1st=1):\n{self.player.hand}\n')
             if 0 < int(chosen_card_index) <= self.player.hand.length():
                 confirmed = True
             else:
